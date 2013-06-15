@@ -52,24 +52,27 @@ We divide #2 by 10 recursively
         Reset
         <<0 [-]
         >>>3 [-]
-        <<1 [-] ++++++++++
+        >4 [-]
+        <<<1 [-] ++++++++++
 
         Subtract 10 from #2 if possible; we go to zero to make an 'if'
         1 [
           >2 [ - >3 + <<0 ]
           >1 -
         ]
-        
-        If subtraction did not make #2 null
-        >>2
-        [
-                Quotient ++; reset bufremainder and dividend 10
-                >3 [-]                
-                <<1 [-] ++++++++++
-                >>>4 +
 
-                <<<1
-                [ 
+        If subtraction did not make #2 null
+        >2
+        [
+                Quotient ++
+                >>4 +
+
+                ; reset bufremainder and dividend 10
+                <3 [-]
+                <<1 [-] ++++++++++
+
+                1
+                [
                           >>2 [ - >3 + <<0 ]
                           >1 -
                 ]
@@ -81,9 +84,9 @@ We divide #2 by 10 recursively
         >>4 [ << 2 + >> - ]
 
         Print remainder; this is backward for now
-        <3 .
+        <3 ++++++++++++++++++++++++++++++++++++++++++++++++ .
 
-        <2                
+        <2
 ]
 
 Print newline
