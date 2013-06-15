@@ -46,38 +46,44 @@ We divide #2 by 10 recursively
 #6 is last digit (remainder 1)
 #n is first digit (last remainder)
 
-2
+>>>5+
+<<<2
 [
         Reset bufremainder set dividend to 10
         >3 [-]
         <<1 [-] ++++++++++
 
-        Subtract 10 from #2 if possible
+        Subtract 10 from #2 if possible; we go to zero to make an 'if'
         1
         [
-          >>2 [ <1 + >2 -  ]
-          <0 -
+          >>2 [ - >3 + <<0 ]
+          >1 -
         ]
         
         If subtraction did not make #2 null
         >>2
         [
                 Quotient ++; reset bufremainder and dividend 10
-                <1 [-]                
-                <0 [-] ++++++++++
-                >>>3 +
+                >3 [-]                
+                <<1 [-] ++++++++++
+                >>>4 +
 
-                <<<0
+                <<<1
                 [ 
-                  >>2 [ <1 + >2 - ]
-                  <0 -
+                          >>2 [ - >3 + <<0 ]
+                          >1 -
                 ]
 
-                >>2
+                >2
         ]
 
         Replace #2 with quotient
-        
+        >>4 [ << 2 + >> - ]
+
+        Print remainder; this is backward for now
+        <3 .
+
+        <2                
 ]
 
 Print newline
