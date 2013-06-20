@@ -41,13 +41,15 @@
 ; We divide #2 by 10 recursively
 ; #0 is zero
 ; #1 is the dividend 10
-; #3 is the bufremainder
+; #3 is the 'bufremainder' (buffer with remainder)
 ; #4 is the quotient
 
+; DMZ to split calculus zone from storage array
 ; #5 is 0
 ; #6 is a remainder copy buffer
 ; #7 is 0
 
+; Begin of array, 3 bytes per cell
 ; #8 is 1
 ; #9 is a remainder copy buffer
 ; #10 is last digit (remainder 1)
@@ -92,14 +94,15 @@
         ]
 
         ; Replace #2 with quotient
-        >>4 [ << 2 + >>4 - ]
+        >>4 [ <<2 + >>4 - ]
 
-        ; Move #3 to #6
+        ; Move remainder from #3 to #6
         <3 [ >>>+ <<<- ]
 
-        >>>>8 [
-            << [ >>> + <<<- ] ; copy remainder
-            >>>>>             ; next cell
+        >>>>>8 [
+            << [ >>> + <<<- ] ; move remainder one cell forward
+            >>
+            >>>             ; next cell
         ]
 
         ; last cell
@@ -114,14 +117,16 @@
 
 ; Print remainder
 >>>>>>8
-[>>>] ; Fast forward to first cell after last non empty cell
-<<< ; last cell
-[ 
+[>>>]   ; Fast forward to first cell after last non empty cell
+<<<     ; last cell
+[
   >>
   ++++++++++++++++++++++++++++++++++++++++++++++++ .
   ------------------------------------------------
-  <<<<< ; previous cell
+  <<
+  <<< ; previous cell
 ]
+; Finished on #5
 
 ; Print newline
-<<0 [-] ++++++++++ .
+<<<<<0 [-] ++++++++++ .
