@@ -4,37 +4,37 @@
 ,------------------------------------------------
 
 ; #0 is the nth fibo we want; we substract one so that Fibo(3) = 2
-- 
+-
 
->1                             ; #1 is 0
->2 +                           ; #2 is 1
+>1                             ; #1 is Fibo(n)
+>2 +                           ; #2 is Fibo(n+1)
 >3 +                           ; #3 is #2 backup
 <<<0
 [
-        ; >1 Move #1 on top of #2 and #4
+        ; Move #1 on top of #2 and #4
+        >1
         [
                 > +
                 >> +
                 <<< -
         ]
 
-       ; >>3 Move #3 back to one; plus on top of 4
-       [
+        ; Move #3 back to one; plus on top of 4
+        >>3
+        [
                 > +
                 <<< +
                 >> -
-       ]
+        ]
 
-       ; >4 Move #4 to #3
-       [
+        ; Move #4 to #3
+        >4 [
                 < +
                 > -
-       ]
+        ]
 
-
-       <<<<0 -
+        <<<<0 -
 ]
-
 
 ; Let's print
 ; 
