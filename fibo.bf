@@ -37,15 +37,24 @@
 ]
 
 ; Let's print
-; 
+;
 ; We divide #2 by 10 recursively
 ; #0 is zero
 ; #1 is the dividend 10
 ; #3 is the bufremainder
 ; #4 is the quotient
-; #5 is the pointer to the current remainder
-; #6 is last digit (remainder 1)
-; #n is first digit (last remainder)
+
+; #5 is 0
+; #6 is a remainder copy buffer
+; #7 is 0
+
+; #8 is 1
+; #9 is a remainder copy buffer
+; #10 is last digit (remainder 1)
+
+; and so on
+
+; #8 plus 3n is 0; this is the end
 
 >>2
 [
@@ -59,7 +68,7 @@
         ; We go to zero to make an 'if'
         1 [
           >2 [ >3+ <2- [ <<0 + >>2 - ] ]
-          <<0 [ >>2+ <<0- ] 
+          <<0 [ >>2+ <<0- ]
           >1 -
         ]
 
@@ -75,7 +84,7 @@
 
                 1 [
                           >2 [ >3+ <2- [ <<0 + >>2 - ] ]
-                          <<0 [ >>2+ <<0- ] 
+                          <<0 [ >>2+ <<0- ]
                           >1 -
                 ]
 
@@ -85,11 +94,33 @@
         ; Replace #2 with quotient
         >>4 [ << 2 + >>4 - ]
 
-        ; Print remainder
-        ; This is backward for now
-        <3 ++++++++++++++++++++++++++++++++++++++++++++++++ .
+        ; Move #3 to #6
+        <3 [ >>>+ <<<- ]
+
+        >>>>8 [
+            << [ >>> + <<<- ] ; copy remainder
+            >>>>>             ; next cell
+        ]
+
+        ; last cell
+        +                   ; set index to one
+        << [ >>>> + <<<<- ] ; copy remainder last time
+        >>
+
+        [ <<< ] ; rewind to 5
 
         <2
+]
+
+; Print remainder
+>>>>>>8
+[>>>] ; Fast forward to first cell after last non empty cell
+<<< ; last cell
+[ 
+  >>
+  ++++++++++++++++++++++++++++++++++++++++++++++++ .
+  ------------------------------------------------
+  <<<<< ; previous cell
 ]
 
 ; Print newline
