@@ -1,28 +1,31 @@
-Fibonacci in Brainfuck; only works with input above '2'
+; Fibonacci in Brainfuck; only works with input above '2'
+; There is no multi-digit support for now
 
 ,------------------------------------------------
-- #0 is the nth fibo we want; we substract one so that F3 = 2
 
->1                             #1 is 0
->2 +                           #2 is 1
->3 +                           #3 is #2 backup
+; #0 is the nth fibo we want; we substract one so that Fibo(3) = 2
+- 
+
+>1                             ; #1 is 0
+>2 +                           ; #2 is 1
+>3 +                           ; #3 is #2 backup
 <<<0
 [
-        >1 Move #1 on top of #2 and #4
+        ; >1 Move #1 on top of #2 and #4
         [
                 > +
                 >> +
                 <<< -
         ]
 
-       >>3 Move #3 back to one; plus on top of 4
+       ; >>3 Move #3 back to one; plus on top of 4
        [
                 > +
                 <<< +
                 >> -
        ]
 
-       >4 Move #4 to #3
+       ; >4 Move #4 to #3
        [
                 < +
                 > -
@@ -32,24 +35,21 @@ Fibonacci in Brainfuck; only works with input above '2'
        <<<<0 -
 ]
 
-Print result in an unsuitable format (19 is ':')
->>2
-++++++++++++++++++++++++++++++++++++++++++++++++ .
-------------------------------------------------
-<<0 [-] ++++++++++ .
 
-We divide #2 by 10 recursively
-#0 is zero
-#1 is the dividend 10
-#3 is the bufremainder
-#4 is the quotient
-#5 is the pointer to the current remainder
-#6 is last digit (remainder 1)
-#n is first digit (last remainder)
+; Let's print
+; 
+; We divide #2 by 10 recursively
+; #0 is zero
+; #1 is the dividend 10
+; #3 is the bufremainder
+; #4 is the quotient
+; #5 is the pointer to the current remainder
+; #6 is last digit (remainder 1)
+; #n is first digit (last remainder)
 
 >>2
 [
-        Reset
+        ; Reset
         <<0 [-]
         >>>3 [-]
         >4 [-]
@@ -63,11 +63,8 @@ We divide #2 by 10 recursively
           >1 -
         ]
 
-
         ; If subtraction did not make #2 null
         >2
-        ++++++++++++++++++++++++++++++++++++++++++++++++ .
-        ------------------------------------------------
         [
                 ; Quotient
                 >>4 +
@@ -95,5 +92,5 @@ We divide #2 by 10 recursively
         <2
 ]
 
-Print newline
+; Print newline
 <<0 [-] ++++++++++ .
