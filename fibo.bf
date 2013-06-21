@@ -1,9 +1,37 @@
 ; Fibonacci in Brainfuck; only works with input above '2'
 ; There is no multi-digit support for now
 
-,------------------------------------------------
+; #0 holds input sums
+; #1 holds current input
+; #2 holds 1 
+; #3 holds 1
+
+
+>>>3 +
+
+<3
+[
+        ; Test if #1 holds 10
+        <1 ,
+        ----------
+        [>2-<] 
+        >2 [>3-<+]
+
+        [-]+ ; Reset #2 to 1
+
+        <1 ++++++++++
+        [<+>-] ; Move #1 to #0
+
+        < 0 ------------------------------------------------
+        >>>3
+]
+
+------------------------------------------------
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; Fibonacci algorithm
+; The simplest part X_x
 
 ; #0 is the nth fibo we want; we substract one so that Fibo(3) = 2
 -
