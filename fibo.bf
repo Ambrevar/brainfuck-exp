@@ -112,12 +112,11 @@
 
         [ <<< ] ; rewind to 5
 
-        <2
+        <<<2
 ]
 
-; Print remainder
 >>>>>>8
-[>>>]   ; Fast forward to first cell after last non empty cell
+[>>>]   ; Fast forward to first empty cell
 <<<     ; last cell
 [
   >>
