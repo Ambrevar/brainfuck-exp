@@ -3,6 +3,8 @@
 
 ,------------------------------------------------
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ; #0 is the nth fibo we want; we substract one so that Fibo(3) = 2
 -
 
@@ -36,24 +38,33 @@
         <<<<0 -
 ]
 
-; Let's print
-;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; Let's print #2
+
 ; We divide #2 by 10 recursively
-; #0 is zero
+; #0 is zero; it is used as temp buffer for various operations
 ; #1 is the dividend 10
-; #3 is the 'bufremainder' (buffer with remainder)
+; #3 holds the current remainder for one loop
 ; #4 is the quotient
 
-; DMZ to split calculus zone from storage array
+; Once we have the remainder in #3 we translate it to the remainder array to
+; store it across loops
+; The remainder array is made of 3 bytes cells
+; Byte #1 = 0 means this is the first cell after the last one
+; Byte #2 is a copy buffer for the remainder translation
+; Byte #3 is the remainder value of the cell
+
+; DMZ to split calculus zone from remainder array
+; We use it to know where to stop when we rewind back from the end of the array
+; to the calculus zone
 ; #5 is 0
-; #6 is a remainder copy buffer
+; #6 is a copy buffer for remainder translation
 ; #7 is 0
 
-; Begin of array, 3 bytes per cell
-; #8 is 1
+; #8 is the first cell of the remainder array
 ; #9 is a remainder copy buffer
-; #10 is last digit (remainder 1)
-
+; #10 is the first remainder; which is the last digit of our final result
 ; and so on
 
 ; #8 plus 3n is 0; this is the end
