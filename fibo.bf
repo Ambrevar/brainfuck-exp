@@ -1,7 +1,11 @@
 ; Fibonacci in Brainfuck; only works with input above '2'
-; There is no multidigit support for now
+; This is extremely slow so do not try it above 20
 
-; #0 holds input sums
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; Input numbers
+
+  #0 holds input sums
 ; #1 holds current input
 
 >>2 + ; Inner end condition
