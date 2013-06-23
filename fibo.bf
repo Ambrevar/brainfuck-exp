@@ -3,12 +3,9 @@
 
 ; #0 holds input sums
 ; #1 holds current input
-; #2 holds 1 
-; #3 holds 1
 
-
->>2 +
->3 +
+>>2 + ; Inner end condition
+>3 + ; Outer end condition
 
 3
 [
@@ -19,25 +16,50 @@
         >>>>5 [<<<<1+ >>>>5-]
         <<<<1
 
-        ; Test if #1 holds 10
-        -------------
-        [>2-<[-]] 
-        >2 [>3-<[-]]
+        ; Test if #1 holds 61
+        -------------------------------------------------------------
+        1 [
+             ; End condition is false
+             >2- 
 
-        [-]+ ; Reset #2 to 1
+             ; Print #4
+             >>4 .
 
-        ; Print #4
-        >>4 .
-        [<<<<+ >>>>-] ; Move #4 to #0
+             <<<1 [+] ; Clear
 
-        <<<< 0 ------------------------------------------------
-        >>>3
+             ; Put the content of #0 ten times to #1
+             <0 [ >1 ++++++++++ <- ]
+
+             ; Put it back to #0
+             >1 [ <0 + >1 - ]
+
+             ; Move #4 to #0
+             >>>4 [ <<<<+ >>>>- ]
+             <<<< 0 ------------------------------------------------
+
+             > 1             
+        ] ; Now #1 is null in any case
+
+        ; If #1 was null then #2 is not and we finish the loop
+        ; by setting nulling #3
+        >2 [ >3- <[-] ]
+
+        2 [-] + ; Reset #2 to 1
+
+        >3
 ]
 
-[-]
+
+3 [-]
 >4 [-]
-<<2 [-]
+>5 [-]
+<<<2 [-]
 <1 [-]
+
+; New line
+++++++++++ . ----------
+
+<0 ; End input phase on #0
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
