@@ -1,5 +1,5 @@
->>2 +
->3 +
+>>2 + ; Inner end condition
+>3 + ; Outer end condition
 
 3
 [
