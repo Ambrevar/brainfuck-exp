@@ -1,5 +1,5 @@
 ; Fibonacci in Brainfuck; only works with input above '2'
-; There is no multi-digit support for now
+; There is no multidigit support for now
 
 ; #0 holds input sums
 ; #1 holds current input
