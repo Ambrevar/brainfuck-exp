@@ -70,7 +70,7 @@
 -
 
 >1                             ; #1 is Fibo(n)
->2 +                           ; #2 is Fibo(n+1)
+>2 +                           ; #2 is Fibo(n plus 1)
 >3 +                           ; #3 is #2 backup
 <<<0
 [
